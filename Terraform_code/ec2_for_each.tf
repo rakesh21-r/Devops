@@ -2,11 +2,11 @@ provider "aws" {
   region = "us-east-1"
 }
 resource "aws_instance" "demo-server" {
-  ami = "ami-0ac4dfaf1c5c0cce9"
+  ami = "ami-04b4f1a9cf54c11d0"
   instance_type = "t2.micro"
   key_name = "Devops_Simple"
   subnet_id = aws_subnet.demo-subnet.id
-  security_groups = aws_security_group.demo-sg.id
+  vpc_security_group_ids = [ aws_security_group.demo-sg.id ]
   for_each = toset(["jenkin_master", "build_slave", "ansible"])
   tags = {
     Name = "demo-server"
